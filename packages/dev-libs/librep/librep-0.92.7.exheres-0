@@ -5,7 +5,6 @@
 
 
 require elisp-module tuxfamily flag-o-matic
-#inherit autotools elisp-common eutils flag-o-matic
 
 SUMMARY="Shared library implementing a Lisp dialect"
 HOMEPAGE="https://github.com/SawfishWM/librep"
@@ -29,7 +28,6 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 	"${FILES}/${PN}-0.92.0-disable-elisp.patch"
 )
 
-#S="${WORKDIR}/${PN}_${PV}"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( readline )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
@@ -53,7 +51,6 @@ src_compile() {
 
 src_install() {
 	default
-	#prune_libtool_files --modules
 
 	dodoc doc/*
 
