@@ -8,6 +8,7 @@ require elisp-module tuxfamily flag-o-matic
 
 SUMMARY="Shared library implementing a Lisp dialect"
 HOMEPAGE="https://github.com/SawfishWM/librep"
+DOWNLOADS="https://download.tuxfamily.org/${PN}/${PNV}.tar.bz2"
 
 #LICENSES="GPL-2"
 SLOT="0"
