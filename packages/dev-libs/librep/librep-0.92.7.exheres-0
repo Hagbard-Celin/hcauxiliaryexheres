@@ -57,6 +57,7 @@ src_compile() {
 }
 
 src_install() {
+	edo rmdir usr/share/aclocal
 	default
 
 	dodoc doc/*
