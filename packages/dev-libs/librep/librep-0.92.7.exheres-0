@@ -57,8 +57,8 @@ src_compile() {
 }
 
 src_install() {
-	edo rmdir "${IMAGE}"/usr/share/aclocal
 	default
+	edo rmdir "${IMAGE}"/usr/share/aclocal
 
 	dodoc doc/*
 
