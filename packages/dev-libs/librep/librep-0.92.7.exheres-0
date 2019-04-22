@@ -53,21 +53,20 @@ src_compile() {
 
 src_install() {
 	default
-	prune_libtool_files --modules
+	#prune_libtool_files --modules
 
 	dodoc doc/*
 
 	if option emacs; then
 		elisp-install ${PN} rep-debugger.{el,elc} || die "elisp-install failed"
-		elisp-site-file-install "${FILESDIR}/50${PN}-gentoo.el" \
-			|| die "elisp-site-file-install failed"
+		elisp-install-site-file || die "elisp-site-file-install failed"
 	fi
 }
 
 pkg_postinst() {
-	option emacs && elisp-site-regen
+	option emacs && elisp-generate-global-site-file
 }
 
 pkg_postrm() {
-	option emacs && elisp-site-regen
+	option emacs && elisp-generate-global-site-file
 }
