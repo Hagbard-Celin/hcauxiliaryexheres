@@ -1,0 +1,21 @@
+--- rep-gtk_0.90.8.3/configure	2019-04-23 19:13:26.936623741 +0100
++++ rep-gtk_0.90.8.3.new/configure	2019-04-23 19:36:25.568843207 +0100
+@@ -14835,14 +14835,14 @@
+ 
+ mv rep-gtk.ebuild rep-gtk-$version.ebuild
+ 
+-REP_VERSION="`pkg-config --modversion librep`"
+-GLIB_VERSION="`pkg-config --modversion glib-2.0`"
++REP_VERSION="`"$PKG_CONFIG" --modversion librep`"
++GLIB_VERSION="`"$PKG_CONFIG" --modversion glib-2.0`"
+ 
+ if $PKG_CONFIG --exists cairo; then
+-	CAIRO_VERSION="`pkg-config --modversion cairo`"
++	CAIRO_VERSION="`"$PKG_CONFIG" --modversion cairo`"
+ fi
+ 
+-GTK_VERSION="`pkg-config --modversion gtk+-2.0`"
++GTK_VERSION="`"$PKG_CONFIG" --modversion gtk+-2.0`"
+ 
+ echo "
+   == == == == == == == == == == == == ==

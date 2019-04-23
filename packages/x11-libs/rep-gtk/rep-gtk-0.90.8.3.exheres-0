@@ -25,6 +25,10 @@ DEPENDENCIES="
 		x11-libs/gdk-pixbuf:2.0[>=2.23]
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+	"${FILES}/rep-gtk-pkg-config.patch"
+)
+
 DEFAULT_SRC_CONFIGURE_PARAMS=(
 	--libdir=/usr/$(exhost --target)/lib
 	--disable-static
