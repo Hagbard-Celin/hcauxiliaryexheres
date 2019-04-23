@@ -6,16 +6,16 @@
 #inherit eutils elisp-common
 require elisp-module tuxfamily
 
-MY_P="${P/-/_}"
+MY_P="${PNV/-/_}"
 SUMMARY="Extensible window manager using a Lisp-based scripting language"
 HOMEPAGE="http://sawfish.wikia.com/"
 
-WORK="${WORKDIR}/${MY_P}"
+#WORK="${WORKDIR}/${MY_P}"
 
 if ever is_scm ; then
 	DOWNLOADS=""
 	SCM_REPOSITORY="https://github.com/SawfishWM/sawfish.git"
-	WORK="${WORKDIR}/${PNV}"
+#	WORK="${WORKDIR}/${PNV}"
 	require scm-git
 fi
 
@@ -41,7 +41,7 @@ DEPENDENCIES="
 
 DEFAULT_SRC_PREPARE_PATCHES=(
 	# From Fedora
-	"${FILES}"/${PNV}-desktop.patch
+	"${FILES}"/${PN}-desktop.patch
 )
 
 DOCS=( AUTHORS ChangeLog CONTRIBUTING doc/AUTOSTART doc/KEYBINDINGS doc/OPTIONS doc/XSettings MAINTAINERS NEWS README README.IMPORTANT TODO )
