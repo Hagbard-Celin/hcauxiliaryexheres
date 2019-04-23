@@ -26,7 +26,7 @@ DEPENDENCIES="
 "
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-	"${FILES}/rep-gtk-pkg-config.patch"
+	-p1 "${FILES}/rep-gtk-pkg-config.patch"
 )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
