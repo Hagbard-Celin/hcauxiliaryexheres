@@ -8,7 +8,7 @@ SUMMARY="GTK+/libglade/GNOME bindings for the librep Lisp environment"
 HOMEPAGE="http://sawfish.wikia.com/wiki/Main_Page"
 DOWNLOADS="http://download.tuxfamily.org/librep/${PN}/${MY_P}.tar.bz2"
 
-LICENSE="GPL-2"
+LICENSES="GPL-2"
 SLOT="gtk-2.0"
 PLATFORMS="alpha amd64 ia64 ppc ~ppc64 sparc x86 ~x86-fbsd"
 MYOPTIONS="examples"
