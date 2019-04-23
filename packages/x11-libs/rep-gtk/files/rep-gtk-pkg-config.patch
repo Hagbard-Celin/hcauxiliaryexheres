@@ -1,6 +1,17 @@
---- rep-gtk_0.90.8.3/configure	2019-04-23 19:13:26.936623741 +0100
-+++ rep-gtk_0.90.8.3.new/configure	2019-04-23 19:36:25.568843207 +0100
-@@ -14835,14 +14835,14 @@
+--- rep-gtk_0.90.8.3/configure.ac	2016-05-26 20:36:27.000000000 +0100
++++ rep-gtk_0.90.8.3.new/configure.ac	2019-04-23 19:48:22.677362897 +0100
+@@ -49,8 +49,8 @@
+ REP_MIN_VER="0.90.5"
+ 
+ PKG_CHECK_MODULES(LIBREP, librep >= $REP_MIN_VER
+-		  ,REP_EXECDIR="`pkg-config --variable=repcommonexecdir librep`"
+-		  REP_CFLAGS="`pkg-config --cflags librep`"
++		  ,REP_EXECDIR="`"$PKG_CONFIG" --variable=repcommonexecdir librep`"
++		  REP_CFLAGS="`"$PKG_CONFIG" --cflags librep`"
+ 		  ,AC_MSG_ERROR([can not locate librep >= $REP_MIN_VER]))
+ 
+ dnl Check for glib
+@@ -110,14 +110,14 @@
  
  mv rep-gtk.ebuild rep-gtk-$version.ebuild
  
