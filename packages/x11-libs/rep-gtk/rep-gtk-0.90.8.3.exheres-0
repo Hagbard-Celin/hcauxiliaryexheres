@@ -1,5 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 2019 HC
 # Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'rep-gtk-0.90.8.3.ebuild', which is:
+# 	Copyright 1999-2018 Gentoo Foundation
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 1.15 ] ]
 
@@ -8,7 +10,7 @@ SUMMARY="GTK+/libglade/GNOME bindings for the librep Lisp environment"
 HOMEPAGE="http://sawfish.wikia.com/wiki/Main_Page"
 DOWNLOADS="http://download.tuxfamily.org/librep/${PN}/${MY_P}.tar.bz2"
 
-LICENSES="GPL-2"
+#LICENSES="GPL-2"
 SLOT="gtk-2.0"
 PLATFORMS="alpha amd64 ia64 ppc ~ppc64 sparc x86 ~x86-fbsd"
 MYOPTIONS="examples"
