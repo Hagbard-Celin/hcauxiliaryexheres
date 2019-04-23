@@ -44,6 +44,7 @@ src_prepare() {
 }
 
 src_install() {
+	edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure
 	default
 	option examples && dodoc -r examples
 	edo find "${IMAGE}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
