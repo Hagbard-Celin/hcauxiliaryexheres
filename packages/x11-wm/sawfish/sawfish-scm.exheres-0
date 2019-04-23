@@ -1,0 +1,102 @@
+# Copyright 2019 HC
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'Sawfish-1.12.0.ebuild', which is:
+#	Copyright 1999-2019 Gentoo Authors
+
+#inherit eutils elisp-common
+require elisp-module tuxfamily
+
+MY_P="${P/-/_}"
+SUMMARY="Extensible window manager using a Lisp-based scripting language"
+HOMEPAGE="http://sawfish.wikia.com/"
+
+WORK="${WORKDIR}/${MY_P}"
+
+if ever is_scm ; then
+	DOWNLOADS=""
+	SCM_REPOSITORY="https://github.com/SawfishWM/sawfish.git"
+	WORK="${WORKDIR}/${PNV}"
+	require scm-git
+fi
+
+SLOT="0"
+PLATFORMS="alpha amd64 ia64 ppc ~ppc64 ~sh sparc x86 ~x86-fbsd"
+MYOPTIONS="emacs kde nls xinerama"
+
+DEPENDENCIES="
+	build:
+		virtual/pkg-config
+	build+run:
+		emacs? ( app-editors/emacs:= )
+		dev-libs/librep
+		x11-libs/rep-gtk
+		x11-libs/pangox-compat
+		x11-libs/gdk-pixbuf:2.0[X]
+		x11-libs/gtk+:2[>=2.24.0]
+		x11-libs/libXtst
+		kde? ( kde-frameworks/kdelibs4support:= )
+		nls? ( sys-devel/gettext:= )
+		xinerama? ( x11-libs/libXinerama:= )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+	# From Fedora
+	"${FILES}"/${PNV}-desktop.patch
+)
+
+DOCS=( AUTHORS ChangeLog CONTRIBUTING doc/AUTOSTART doc/KEYBINDINGS doc/OPTIONS doc/XSettings MAINTAINERS NEWS README README.IMPORTANT TODO )
+
+src_prepare() {
+	default
+	if ever is_scm ; then
+		./autogen.sh || die;
+	fi
+}
+
+
+src_configure() {
+	set -- \
+		$(use_with kde kde5session) \
+		$(use_with xinerama) \
+		--with-gdk-pixbuf \
+		--without-kde4session \
+		--disable-static
+
+	if ! option nls; then
+		# Use a space because configure script reads --enable-linguas=""
+		# as "install everything". Don't use --disable-linguas, because
+		# that means --enable-linguas="no", which means "install
+		# Norwegian translations".
+		set -- "$@" --enable-linguas=" "
+	elif [[ "${LINGUAS+set}" == "set" ]]; then
+		strip-linguas -i po
+		set -- "$@" --enable-linguas=" ${LINGUAS} "
+	else
+		set -- "$@" --enable-linguas=""
+	fi
+
+	econf "$@"
+}
+
+src_compile() {
+	default
+	option emacs && elisp-compile sawfish.el
+}
+
+src_install() {
+	default
+	find "${IMAGE}" -name '*.la' -delete || die
+
+	if use emacs; then
+		elisp-install ${PN} sawfish.{el,elc}
+		elisp-install-site-file
+	fi
+}
+
+pkg_postinst() {
+	option emacs && elisp-generate-global-site-file
+}
+
+pkg_postrm() {
+	option emacs && elisp-generate-global-site-file
+}

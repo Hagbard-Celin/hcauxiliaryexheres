@@ -1,0 +1,44 @@
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 1.15 ] ]
+
+MY_P="${PN}_${PV}"
+SUMMARY="GTK+/libglade/GNOME bindings for the librep Lisp environment"
+HOMEPAGE="http://sawfish.wikia.com/wiki/Main_Page"
+DOWNLOADS="http://download.tuxfamily.org/librep/${PN}/${MY_P}.tar.bz2"
+
+LICENSE="GPL-2"
+SLOT="gtk-2.0"
+PLATFORMS="alpha amd64 ia64 ppc ~ppc64 sparc x86 ~x86-fbsd"
+MYOPTIONS="examples"
+
+DEPENDENCIES="
+	build:
+		virtual/pkg-config
+	build+run:
+		dev-libs/librep
+		dev-libs/glib:2
+		x11-libs/gtk+:2[>=2.24]
+		x11-libs/gdk-pixbuf:2.0[>=2.23]
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+	--libdir=/usr/$(exhost --target)/lib
+	--disable-static
+
+)
+WORK="${WORKBASE}/${MY_P}"
+
+DOCS=( AUTHORS ChangeLog README README.gtk-defs README.guile-gtk TODO )
+
+src_prepare() {
+	default
+	eautoreconf
+}
+
+src_install() {
+	default
+	option examples && dodoc -r examples
+	edo find "${IMAGE}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
+}

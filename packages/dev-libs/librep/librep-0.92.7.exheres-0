@@ -30,7 +30,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 )
 
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( readline )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( emacs readline )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
 	--libexecdir="/usr/$(exhost --target)/libexec/librep"
 	--without-gmp
