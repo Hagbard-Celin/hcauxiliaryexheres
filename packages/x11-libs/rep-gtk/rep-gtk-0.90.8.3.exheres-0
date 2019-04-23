@@ -43,8 +43,12 @@ src_prepare() {
 	eautoreconf
 }
 
-src_install() {
+src_configure() {
 	edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure
+	default
+}
+
+src_install() {
 	default
 	option examples && dodoc -r examples
 	edo find "${IMAGE}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
