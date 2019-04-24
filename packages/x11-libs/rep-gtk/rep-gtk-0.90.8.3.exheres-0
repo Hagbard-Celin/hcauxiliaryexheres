@@ -31,6 +31,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
 	--libdir=/usr/$(exhost --target)/lib
+	--exec_prefix=/usr/$(exhost --target)
 	--disable-static
 
 )
@@ -44,9 +45,8 @@ src_prepare() {
 }
 
 src_configure() {
-	edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure
-	edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i aclocal.m4
-	edo echo ${PKG_CONFIG}
+	#edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure
+	#edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i aclocal.m4
 	default
 }
 
