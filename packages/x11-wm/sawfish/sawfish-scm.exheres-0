@@ -87,6 +87,7 @@ src_compile() {
 
 src_install() {
 	default
+	edo rmdir "${IMAGE}"/usr/share/locale
 	find "${IMAGE}" -name '*.la' -delete || die
 
 	if option emacs; then
