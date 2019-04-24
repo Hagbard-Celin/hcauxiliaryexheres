@@ -1,1 +1,11 @@
-/usr/x86_64-pc-linux-gnu/lib/rep
+diff -Naur librep_0.92.7/rules.mk.in librep_0.92.7.new/rules.mk.in
+--- librep_0.92.7/rules.mk.in	2017-08-25 20:59:05.000000000 +0100
++++ librep_0.92.7.new/rules.mk.in	2019-04-24 15:48:55.902656617 +0100
+@@ -1,6 +1,6 @@
+ # rules.mk
+ 
+-repcommonexecdir?=$(shell pkg-config --variable=repcommonexecdir librep)
++repcommonexecdir?=$(shell $(PKG_CONFIG) --variable=repcommonexecdir librep)
+ rpath_repcommonexecdir:=$(repcommonexecdir)
+ 
+ rep_LIBTOOL:=$(repcommonexecdir)/libtool --tag CC
