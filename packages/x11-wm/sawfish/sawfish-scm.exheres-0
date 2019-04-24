@@ -89,7 +89,7 @@ src_install() {
 	default
 	find "${IMAGE}" -name '*.la' -delete || die
 
-	if use emacs; then
+	if option emacs; then
 		elisp-install ${PN} sawfish.{el,elc}
 		elisp-install-site-file
 	fi
