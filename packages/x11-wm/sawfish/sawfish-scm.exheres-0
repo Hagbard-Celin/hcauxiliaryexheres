@@ -58,8 +58,8 @@ src_prepare() {
 
 src_configure() {
 	set -- \
-		$(use_with kde kde5session) \
-		$(use_with xinerama) \
+		$(option_with kde kde5session) \
+		$(option_with xinerama) \
 		--with-gdk-pixbuf \
 		--without-kde4session \
 		--disable-static
