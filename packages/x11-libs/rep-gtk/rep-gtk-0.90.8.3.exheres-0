@@ -49,6 +49,7 @@ src_configure() {
 	edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure
 	#edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i aclocal.m4
 	default
+	set -x
 }
 
 src_install() {
