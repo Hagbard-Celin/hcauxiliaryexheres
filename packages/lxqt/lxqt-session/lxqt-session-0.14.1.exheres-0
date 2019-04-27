@@ -1,0 +1,33 @@
+# Copyright 2014 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require lxqt
+
+SUMMARY="LXQt session manager"
+
+PLATFORMS="~amd64"
+MYOPTIONS="( providers: eudev systemd )"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        x11-proto/xorgproto
+    build+run:
+        kde-frameworks/kwindowsystem:5[>=5.36.0]
+        lxqt/liblxqt[~${PV}]
+        lxqt/libqtxdg
+        x11-libs/libX11
+        x11-libs/qtbase:5[>=5.7.1]
+        x11-libs/qttools:5[>=5.7.1]
+        x11-libs/qtx11extras:5[>=5.7.1]
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+    run:
+        lxqt/lxqt-themes
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS+=(
+    # keyboard layout/settings reload after new input device added
+    -DWITH_LIBUDEV:BOOL=TRUE
+)
+

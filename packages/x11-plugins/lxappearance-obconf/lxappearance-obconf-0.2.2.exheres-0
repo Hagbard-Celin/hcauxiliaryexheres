@@ -1,0 +1,42 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require lxde
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 ] ]
+
+SUMMARY="Openbox plugin for lxappearance"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    gtk3
+    ( linguas:
+        ar be bg bn_IN cs da de el en@boldquot en_GB en@quot es et eu
+        fa fi fo fr gl he hr hu id it ja kk ko lg lt nb nl pl pt pt_BR
+        ro ru sl sr sr@latin sv te tr tt_RU ug uk vi zh_CN zh_TW
+    )
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        virtual/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2
+        lxde-desktop/lxappearance[gtk3?]
+        x11-libs/gdk-pixbuf:2.0
+        x11-wm/openbox[>=3.5.0]
+        !gtk3? ( x11-libs/gtk+:2 )
+        gtk3? ( x11-libs/gtk+:3 )
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gtk3 )
+
+src_prepare() {
+    edo sed -e "s/pkg-config/${PKG_CONFIG}/g" -i configure.ac
+    edo intltoolize --automake --copy --force
+    autotools_src_prepare
+}
+
